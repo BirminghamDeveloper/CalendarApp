@@ -28,6 +28,8 @@ class MainActivity : AppCompatActivity() {
     private val appointments = mutableListOf<Appointment>()
     private var selectedDate = ""
 
+    error
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
