@@ -17,7 +17,9 @@ import androidx.core.view.WindowInsetsCompat
 import java.util.*
 
 data class Appointment(val title: String, val description: String, val date: String)
+
 class MainActivity : AppCompatActivity() {
+
     private lateinit var calendarView: CalendarView
     private lateinit var selectedDateText: TextView
     private lateinit var addAppointmentButton: Button
@@ -76,10 +78,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateAppointmentList() {
         val filteredAppointments = appointments.filter { it.date == selectedDate }
-        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_2, android.R.id.text1, filteredAppointments) { view, appointment ->
-            view.findViewById<TextView>(android.R.id.text1).text = appointment.title
-            view.findViewById<TextView>(android.R.id.text2).text = appointment.description
-        }
+        val adapter = AppointmentAdapter(this, filteredAppointments)
         appointmentListView.adapter = adapter
     }
 }
