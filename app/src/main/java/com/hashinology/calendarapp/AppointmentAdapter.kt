@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
+import com.hashinology.calendarapp.model.Appointment
 
 class AppointmentAdapter(context: Context, appointments: List<Appointment>) :
     ArrayAdapter<Appointment>(context, 0, appointments) {
