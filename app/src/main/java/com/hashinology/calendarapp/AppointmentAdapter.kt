@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
 
-class AppointmentAdapter(context: Context, private val appointments: List<Appointment>) :
+class AppointmentAdapter(context: Context, appointments: List<Appointment>) :
     ArrayAdapter<Appointment>(context, 0, appointments) {
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {

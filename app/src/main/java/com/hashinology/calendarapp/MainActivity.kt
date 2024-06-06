@@ -10,13 +10,14 @@ import android.widget.EditText
 import android.widget.ListView
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AlertDialog
+import android.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.ViewModelProvider
+
 import java.util.*
 
-data class Appointment(val title: String, val description: String, val date: String)
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,12 +26,13 @@ class MainActivity : AppCompatActivity() {
     private lateinit var addAppointmentButton: Button
     private lateinit var appointmentListView: ListView
 
-    private val appointments = mutableListOf<Appointment>()
-    private var selectedDate = ""
+    private lateinit var viewModel: CalenderVM
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        viewModel = ViewModelProvider(this).get(CalenderVM::class.java)
 
         calendarView = findViewById(R.id.calendarView)
         selectedDateText = findViewById(R.id.selectedDateText)
@@ -38,18 +40,27 @@ class MainActivity : AppCompatActivity() {
         appointmentListView = findViewById(R.id.appointmentListView)
 
         val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.US)
-        selectedDate = sdf.format(Date())
-        selectedDateText.text = "Selected Date: $selectedDate"
+        val currentDate = sdf.format(Date())
+        viewModel.selectDate(currentDate)
+        selectedDateText.text = "Selected Date: $currentDate"
 
         calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
-            selectedDate = "$dayOfMonth/${month + 1}/$year"
-            selectedDateText.text = "Selected Date: $selectedDate"
-            updateAppointmentList()
+            val selectedDate = "$dayOfMonth/${month + 1}/$year"
+            viewModel.selectDate(selectedDate)
         }
 
         addAppointmentButton.setOnClickListener {
             showAddAppointmentDialog()
         }
+
+        viewModel.selectedDate.observe(this, Observer { date ->
+            selectedDateText.text = "Selected Date: $date"
+            updateAppointmentList()
+        })
+
+        viewModel.appointments.observe(this, Observer {
+            updateAppointmentList()
+        })
 
         updateAppointmentList()
     }
@@ -69,16 +80,15 @@ class MainActivity : AppCompatActivity() {
         saveAppointmentButton.setOnClickListener {
             val title = appointmentTitle.text.toString()
             val description = appointmentDescription.text.toString()
-            val appointment = Appointment(title, description, selectedDate)
-            appointments.add(appointment)
-            updateAppointmentList()
+            val appointment = Appointment(title, description, viewModel.selectedDate.value ?: "")
+            viewModel.addAppointment(appointment)
             alertDialog.dismiss()
         }
     }
 
     private fun updateAppointmentList() {
-        val filteredAppointments = appointments.filter { it.date == selectedDate }
-        val adapter = AppointmentAdapter(this, filteredAppointments)
+        val appointments = viewModel.getAppointmentsForSelectedDate()
+        val adapter = AppointmentAdapter(this, appointments)
         appointmentListView.adapter = adapter
     }
 }

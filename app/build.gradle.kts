@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+//    alias(libs.plugins.org.jetbrains.kotlin.kapt)
 }
 
 android {
@@ -37,6 +38,9 @@ android {
 
 dependencies {
 
+    val lifecycle_version = "2.8.1"
+    val arch_version = "2.2.0"
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -45,4 +49,14 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    // ViewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
+    // LiveData
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
+    // Lifecycles only (without ViewModel or LiveData)
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version")
+    implementation ("org.jetbrains.kotlin:kotlin-stdlib:1.8.0")
+    /*// Annotation processor
+    kapt("androidx.lifecycle:lifecycle-compiler:$lifecycle_version")*/
 }
