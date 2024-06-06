@@ -2,8 +2,10 @@ package com.hashinology.calendarapp
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import com.hashinology.calendarapp.model.Appointment
 
-class CalenderVM() {
+class CalenderVM(): ViewModel() {
     private val _appointments = MutableLiveData<MutableList<Appointment>>(mutableListOf())
     val appointments: LiveData<MutableList<Appointment>> get() = _appointments
 

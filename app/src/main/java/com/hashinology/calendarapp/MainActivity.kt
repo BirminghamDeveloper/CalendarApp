@@ -4,19 +4,17 @@ import java.text.SimpleDateFormat
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.*
-import android.widget.Button
-import android.widget.CalendarView
-import android.widget.EditText
-import android.widget.ListView
-import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import android.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
-
+import com.hashinology.calendarapp.model.Appointment
+import androidx.lifecycle.Observer
+import com.hashinology.calendarapp.R
 import java.util.*
+
 
 
 class MainActivity : AppCompatActivity() {
@@ -32,6 +30,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // Initialize the ViewModel using ViewModelProvider
         viewModel = ViewModelProvider(this).get(CalenderVM::class.java)
 
         calendarView = findViewById(R.id.calendarView)
@@ -53,11 +52,13 @@ class MainActivity : AppCompatActivity() {
             showAddAppointmentDialog()
         }
 
+        // Observe selectedDate LiveData
         viewModel.selectedDate.observe(this, Observer { date ->
             selectedDateText.text = "Selected Date: $date"
             updateAppointmentList()
         })
 
+        // Observe appointments LiveData
         viewModel.appointments.observe(this, Observer {
             updateAppointmentList()
         })
