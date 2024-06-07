@@ -39,6 +39,7 @@ android {
 
 dependencies {
 
+    implementation(libs.androidx.room.common)
     val lifecycle_version = "2.8.1"
     val arch_version = "2.2.0"
 

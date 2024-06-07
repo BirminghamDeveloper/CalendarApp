@@ -1,27 +1,39 @@
 package com.hashinology.calendarapp
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.hashinology.calendarapp.db.AppDatabase
 import com.hashinology.calendarapp.model.Appointment
+import com.hashinology.calendarapp.repo.AppointmentRepository
+import kotlinx.coroutines.launch
 
-class CalenderVM(): ViewModel() {
-    private val _appointments = MutableLiveData<MutableList<Appointment>>(mutableListOf())
-    val appointments: LiveData<MutableList<Appointment>> get() = _appointments
+class CalendarVM(application: Application) : AndroidViewModel(application) {
 
+    private val repository: AppointmentRepository
     private val _selectedDate = MutableLiveData<String>()
     val selectedDate: LiveData<String> get() = _selectedDate
+
+    init {
+        val appointmentDao = AppDatabase.getDatabase(application).appointmentDao()
+        repository = AppointmentRepository(appointmentDao)
+    }
 
     fun selectDate(date: String) {
         _selectedDate.value = date
     }
 
-    fun addAppointment(appointment: Appointment) {
-        _appointments.value?.add(appointment)
-        _appointments.value = _appointments.value
+    fun getAppointmentsForSelectedDate(): LiveData<List<Appointment>> {
+        return Transformations.switchMap(_selectedDate) { date ->
+            repository.getAppointmentsByDate(date)
+        }
     }
 
-    fun getAppointmentsForSelectedDate(): List<Appointment> {
-        return _appointments.value?.filter { it.date == _selectedDate.value } ?: emptyList()
+    fun addAppointment(appointment: Appointment) {
+        viewModelScope.launch {
+            repository.insert(appointment)
+        }
     }
 }

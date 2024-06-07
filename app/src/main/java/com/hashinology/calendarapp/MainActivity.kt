@@ -24,14 +24,15 @@ class MainActivity : AppCompatActivity() {
     private lateinit var addAppointmentButton: Button
     private lateinit var appointmentListView: ListView
 
-    private lateinit var viewModel: CalenderVM
+    private lateinit var viewModel: CalendarVM
+    private lateinit var adapter: AppointmentAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         // Initialize the ViewModel using ViewModelProvider
-        viewModel = ViewModelProvider(this).get(CalenderVM::class.java)
+        viewModel = ViewModelProvider(this).get(CalendarVM::class.java)
 
         calendarView = findViewById(R.id.calendarView)
         selectedDateText = findViewById(R.id.selectedDateText)
@@ -52,18 +53,15 @@ class MainActivity : AppCompatActivity() {
             showAddAppointmentDialog()
         }
 
-        // Observe selectedDate LiveData
         viewModel.selectedDate.observe(this, Observer { date ->
             selectedDateText.text = "Selected Date: $date"
-            updateAppointmentList()
+            viewModel.getAppointmentsForSelectedDate().observe(this, Observer { appointments ->
+                updateAppointmentList(appointments)
+            })
         })
 
-        // Observe appointments LiveData
-        viewModel.appointments.observe(this, Observer {
-            updateAppointmentList()
-        })
-
-        updateAppointmentList()
+        adapter = AppointmentAdapter(this, emptyList())
+        appointmentListView.adapter = adapter
     }
 
     private fun showAddAppointmentDialog() {
@@ -87,9 +85,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun updateAppointmentList() {
-        val appointments = viewModel.getAppointmentsForSelectedDate()
-        val adapter = AppointmentAdapter(this, appointments)
-        appointmentListView.adapter = adapter
+    private fun updateAppointmentList(appointments: List<Appointment>) {
+        adapter.clear()
+        adapter.addAll(appointments)
+        adapter.notifyDataSetChanged()
     }
 }
