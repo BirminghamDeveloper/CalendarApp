@@ -8,7 +8,8 @@ import com.hashinology.calendarapp.model.Appointment
 
 @Database(
     entities = [Appointment::class],
-    version = 1
+    version = 1,
+    exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
     abstract fun appointmentDao(): AppointmentDao
