@@ -1,4 +1,4 @@
-package com.hashinology.calendarapp
+package com.hashi.calendarapp
 
 import org.junit.Test
 

@@ -1,4 +1,4 @@
-package com.hashinology.calendarapp
+package com.hashi.calendarapp
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,7 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
-import com.hashinology.calendarapp.model.Appointment
+import com.hashi.calendarapp.model.Appointment
+import com.hashinology.calendarapp.R
 
 class AppointmentAdapter(context: Context, appointments: List<Appointment>) :
     ArrayAdapter<Appointment>(context, 0, appointments) {

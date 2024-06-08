@@ -1,10 +1,9 @@
-package com.hashinology.calendarapp
+package com.hashi.calendarapp
 
 import java.text.SimpleDateFormat
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.*
-import androidx.activity.enableEdgeToEdge
 import android.app.AlertDialog
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -14,11 +13,10 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
-import com.hashinology.calendarapp.model.Appointment
+import com.hashi.calendarapp.model.Appointment
 import androidx.lifecycle.Observer
+import com.hashi.calendarapp.viewmodel.CalendarVM
 import com.hashinology.calendarapp.R
 import java.util.*
 
@@ -101,7 +99,7 @@ class MainActivity : AppCompatActivity() {
 
         appointmentListView.setOnItemClickListener { _, _, position, _ ->
             val appointment = adapter.getItem(position)
-            showEditDeleteDialog(appointment)
+            showEditDeleteDialog(appointment!!)
         }
     }
 

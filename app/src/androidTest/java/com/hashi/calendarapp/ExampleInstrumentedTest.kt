@@ -1,4 +1,4 @@
-package com.hashinology.calendarapp
+package com.hashi.calendarapp
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

@@ -1,15 +1,14 @@
-package com.hashinology.calendarapp.db
+package com.hashi.calendarapp.db
 
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import android.content.Context
-import com.hashinology.calendarapp.model.Appointment
+import com.hashi.calendarapp.model.Appointment
 
 @Database(
     entities = [Appointment::class],
-    version = 1,
-    exportSchema = false
+    version = 1
 )
 abstract class AppDatabase : RoomDatabase() {
     abstract fun appointmentDao(): AppointmentDao

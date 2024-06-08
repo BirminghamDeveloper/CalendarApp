@@ -59,6 +59,7 @@ dependencies {
     // Lifecycles only (without ViewModel or LiveData)
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_version")
     implementation ("org.jetbrains.kotlin:kotlin-stdlib:1.8.0")
+
     // Room components
     implementation ("androidx.room:room-runtime:2.5.0")
     kapt ("androidx.room:room-compiler:2.5.0")
