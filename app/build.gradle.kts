@@ -42,6 +42,7 @@ dependencies {
     implementation(libs.androidx.room.common)
     val lifecycle_version = "2.8.1"
     val arch_version = "2.2.0"
+    val nav_version = "2.3.5"
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -64,6 +65,10 @@ dependencies {
     implementation ("androidx.room:room-runtime:2.5.0")
     kapt ("androidx.room:room-compiler:2.5.0")
     implementation ("androidx.room:room-ktx:2.5.0")
+
+    // Navigation Components:
+    implementation ("androidx.navigation:navigation-fragment-ktx:$nav_version")
+    implementation ("androidx.navigation:navigation-ui-ktx:$nav_version")
 
     // Coroutines
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
