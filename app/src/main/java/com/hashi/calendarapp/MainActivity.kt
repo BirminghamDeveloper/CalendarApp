@@ -16,12 +16,29 @@ import androidx.core.app.NotificationCompat
 import androidx.lifecycle.ViewModelProvider
 import com.hashi.calendarapp.model.Appointment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.hashi.calendarapp.viewmodel.CalendarVM
 import com.hashinology.calendarapp.R
 import java.util.*
 
+class MainActivity : AppCompatActivity() {
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
 
+        val navHostFragment = supportFragmentManager
+            .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navController = navHostFragment.navController
+
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        NavigationUI.setupWithNavController(bottomNavigationView, navController)
+    }
+}
+
+/*
 class MainActivity : AppCompatActivity() {
 
     private lateinit var calendarView: CalendarView
@@ -202,4 +219,4 @@ class MainActivity : AppCompatActivity() {
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.notify(appointment.id, notification)
     }
-}
+}*/

@@ -5,13 +5,12 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import android.content.Context
 import com.hashi.calendarapp.model.Appointment
+import com.hashi.calendarapp.model.Event
 
-@Database(
-    entities = [Appointment::class],
-    version = 1
-)
+@Database(entities = [Appointment::class, Event::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun appointmentDao(): AppointmentDao
+    abstract fun eventDao(): EventDao
 
     companion object {
         @Volatile
@@ -22,7 +21,7 @@ abstract class AppDatabase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     AppDatabase::class.java,
-                    "appointment_database"
+                    "calendar_database"
                 ).build()
                 INSTANCE = instance
                 instance
