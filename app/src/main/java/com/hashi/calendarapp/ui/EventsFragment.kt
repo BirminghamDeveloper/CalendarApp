@@ -31,18 +31,18 @@ class EventsFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        var selectedDateText: TextView? = null
-        var eventListView: ListView? = null
-        var addEventButton: Button? = null
-        val eventName: EditText? = null
-        val eventDescription: EditText? = null
+        var selectedDateText: TextView = TODO()
+        var eventListView: ListView = TODO()
+        var addEventButton: Button = TODO()
+        val eventName: EditText = TODO()
+        val eventDescription: EditText = TODO()
 
         super.onViewCreated(view, savedInstanceState)
 
         viewModel = ViewModelProvider(this).get(CalendarVM::class.java)
 
         adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, ArrayList())
-        eventListView!!.adapter = adapter
+        eventListView.adapter = adapter
 
         viewModel.events.observe(viewLifecycleOwner, Observer { events ->
             adapter.clear()
@@ -51,12 +51,12 @@ class EventsFragment : Fragment() {
         })
 
         viewModel.selectedDate.observe(viewLifecycleOwner, Observer { date ->
-            selectedDateText!!.text = "Selected Date: $date"
+            selectedDateText.text = "Selected Date: $date"
         })
 
         addEventButton!!.setOnClickListener {
-            val name = eventName!!.text.toString()
-            val description = eventDescription!!.text.toString()
+            val name = eventName.text.toString()
+            val description = eventDescription.text.toString()
             if (name.isNotEmpty() && description.isNotEmpty()) {
                 val event = Event(name = name, description = description, date = viewModel.selectedDate.value ?: "")
                 viewModel.addEvent(event)

@@ -22,21 +22,3 @@ interface AppointmentDao {
     @Query("SELECT * FROM appointments WHERE title LIKE :searchQuery")
     fun searchAppointmentsByTitle(searchQuery: String): LiveData<List<Appointment>>
 }
-
-@Dao
-interface EventDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(event: Event): Long
-
-    @Update
-    suspend fun update(event: Event)
-
-    @Delete
-    suspend fun delete(event: Event)
-
-    @Query("SELECT * FROM events WHERE date = :date")
-    fun getEventsByDate(date: String): LiveData<List<Event>>
-
-    @Query("SELECT * FROM events WHERE name LIKE :searchQuery")
-    fun searchEventsByName(searchQuery: String): LiveData<List<Event>>
-}

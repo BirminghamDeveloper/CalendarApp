@@ -29,25 +29,4 @@ class AppointmentRepository(private val appointmentDao: AppointmentDao) {
     }
 }
 
-class EventRepository(private val eventDao: EventDao) {
 
-    fun getEventsByDate(date: String): LiveData<List<Event>> {
-        return eventDao.getEventsByDate(date)
-    }
-
-    fun searchEventsByName(searchQuery: String): LiveData<List<Event>> {
-        return eventDao.searchEventsByName("%$searchQuery%")
-    }
-
-    suspend fun insert(event: Event): Long {
-        return eventDao.insert(event)
-    }
-
-    suspend fun update(event: Event) {
-        eventDao.update(event)
-    }
-
-    suspend fun delete(event: Event) {
-        eventDao.delete(event)
-    }
-}
