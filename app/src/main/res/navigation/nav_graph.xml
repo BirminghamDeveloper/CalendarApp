@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/appointmentsFragment">
+
+    <fragment
+        android:id="@+id/appointmentsFragment"
+        android:name="com.hashi.calendarapp.ui.AppointmentsFragment"
+        android:label="Appointments"
+        tools:layout="@layout/fragment_appointments" />
+
+    <fragment
+        android:id="@+id/eventsFragment"
+        android:name="com.hashi.calendarapp.ui.EventsFragment"
+        android:label="Events"
+        tools:layout="@layout/fragment_events" />
+</navigation>
