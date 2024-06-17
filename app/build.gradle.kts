@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.jetbrainsKotlinAndroid)
     id ("kotlin-kapt")
 //    alias(libs.plugins.org.jetbrains.kotlin.kapt)
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -35,6 +36,9 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -63,6 +67,7 @@ dependencies {
 
     // Room components
     implementation ("androidx.room:room-runtime:2.5.0")
+//    ksp("androidx.room:room-compiler:2.4.0")
     kapt ("androidx.room:room-compiler:2.5.0")
     implementation ("androidx.room:room-ktx:2.5.0")
 
@@ -76,3 +81,6 @@ dependencies {
     /*// Annotation processor
     kapt("androidx.lifecycle:lifecycle-compiler:$lifecycle_version")*/
 }
+//ksp {
+//    arg("room.schemaLocation", "$projectDir/schemas")
+//}

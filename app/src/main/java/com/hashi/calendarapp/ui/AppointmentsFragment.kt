@@ -19,6 +19,11 @@ import com.hashinology.calendarapp.R
 
 class AppointmentsFragment : Fragment() {
 
+    lateinit var appointmentListView: ListView
+    lateinit var selectedDateText: TextView
+    lateinit var addAppointmentButton: Button
+    lateinit var appointmentTitle: EditText
+    lateinit var appointmentDescription: EditText
 
     private lateinit var viewModel: CalendarVM
     private lateinit var adapter: ArrayAdapter<Appointment>
@@ -27,17 +32,18 @@ class AppointmentsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_appointments, container, false)
+        val view = inflater.inflate(R.layout.fragment_appointments, container, false)
+        appointmentListView = view.findViewById(R.id.appointmentListView)
+        selectedDateText = view.findViewById(R.id.selectedDateText)
+        addAppointmentButton = view.findViewById(R.id.addAppointmentButton)
+        appointmentTitle = view.findViewById(R.id.appointmentTitle)
+        appointmentDescription = view.findViewById(R.id.appointmentDescription)
+
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val appointmentListView: ListView = TODO()
-        val selectedDateText: TextView = TODO()
-        val addAppointmentButton: Button = TODO()
-        val appointmentTitle: EditText = TODO()
-        val appointmentDescription: EditText = TODO()
 
         viewModel = ViewModelProvider(this).get(CalendarVM::class.java)
 

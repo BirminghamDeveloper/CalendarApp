@@ -7,6 +7,30 @@ import android.content.Context
 import com.hashi.calendarapp.model.Appointment
 import com.hashi.calendarapp.model.Event
 
+// AppDatabase.kt
+@Database(entities = [Appointment::class, Event::class], version = 1)
+abstract class AppDatabase : RoomDatabase() {
+    abstract fun appointmentDao(): AppointmentDao
+    abstract fun eventDao(): EventDao
+
+    companion object {
+        @Volatile
+        private var INSTANCE: AppDatabase? = null
+
+        fun getDatabase(context: Context): AppDatabase {
+            return INSTANCE ?: synchronized(this) {
+                val instance = Room.databaseBuilder(
+                    context.applicationContext,
+                    AppDatabase::class.java,
+                    "app_database"
+                ).build()
+                INSTANCE = instance
+                instance
+            }
+        }
+    }
+}
+/*
 @Database(entities = [Appointment::class, Event::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun appointmentDao(): AppointmentDao
@@ -28,4 +52,4 @@ abstract class AppDatabase : RoomDatabase() {
             }
         }
     }
-}
+}*/

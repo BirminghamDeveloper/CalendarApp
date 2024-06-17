@@ -8,7 +8,7 @@ import com.hashi.calendarapp.model.Event
 @Dao
 interface AppointmentDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(appointment: Appointment): Long
+    suspend fun insert(appointment: Appointment)
 
     @Update
     suspend fun update(appointment: Appointment)

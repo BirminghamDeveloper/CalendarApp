@@ -19,6 +19,11 @@ import com.hashi.calendarapp.viewmodel.CalendarVM
 import com.hashinology.calendarapp.R
 
 class EventsFragment : Fragment() {
+    lateinit var selectedDateText: TextView
+    lateinit var eventListView: ListView
+    lateinit var addEventButton: Button
+    lateinit var eventName: EditText
+    lateinit var eventDescription: EditText
 
     private lateinit var viewModel: CalendarVM
     private lateinit var adapter: ArrayAdapter<Event>
@@ -27,15 +32,16 @@ class EventsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_events, container, false)
+        val view = inflater.inflate(R.layout.fragment_events, container, false)
+        selectedDateText = view.findViewById(R.id.selectedDateText)
+        eventListView = view.findViewById(R.id.eventListView)
+        addEventButton = view.findViewById(R.id.addEventButton)
+        eventName = view.findViewById(R.id.eventName)
+        eventDescription = view.findViewById(R.id.eventDescription)
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        var selectedDateText: TextView = TODO()
-        var eventListView: ListView = TODO()
-        var addEventButton: Button = TODO()
-        val eventName: EditText = TODO()
-        val eventDescription: EditText = TODO()
 
         super.onViewCreated(view, savedInstanceState)
 
@@ -54,7 +60,7 @@ class EventsFragment : Fragment() {
             selectedDateText.text = "Selected Date: $date"
         })
 
-        addEventButton!!.setOnClickListener {
+        addEventButton.setOnClickListener {
             val name = eventName.text.toString()
             val description = eventDescription.text.toString()
             if (name.isNotEmpty() && description.isNotEmpty()) {

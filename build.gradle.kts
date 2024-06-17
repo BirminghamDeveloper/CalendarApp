@@ -3,4 +3,18 @@ plugins {
     alias(libs.plugins.androidApplication) apply false
     alias(libs.plugins.jetbrainsKotlinAndroid) apply false
 //    alias(libs.plugins.org.jetbrains.kotlin.kapt) apply false
+//    alias(libs.plugins.googleKsp) apply true
+    // Add KSP plugin alias
+//    alias(libs.plugins.googleKsp) apply false
 }
+
+/*
+dependencyResolutionManagement {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+rootProject.name = "CalendarApp"
+include(":app")*/
