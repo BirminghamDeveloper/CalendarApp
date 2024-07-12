@@ -3,7 +3,7 @@ plugins {
     alias(libs.plugins.jetbrainsKotlinAndroid)
     id ("kotlin-kapt")
 //    alias(libs.plugins.org.jetbrains.kotlin.kapt)
-    id("com.google.devtools.ksp")
+//    id("com.google.devtools.ksp")
 }
 
 android {
@@ -80,6 +80,8 @@ dependencies {
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2")
     /*// Annotation processor
     kapt("androidx.lifecycle:lifecycle-compiler:$lifecycle_version")*/
+
+    implementation(libs.kotlinx.serialization.json)
 }
 //ksp {
 //    arg("room.schemaLocation", "$projectDir/schemas")

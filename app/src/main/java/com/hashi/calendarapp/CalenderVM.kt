@@ -7,6 +7,8 @@ import com.hashi.calendarapp.model.Appointment
 import com.hashi.calendarapp.model.Event
 import com.hashi.calendarapp.repo.AppointmentRepository
 import com.hashi.calendarapp.repo.EventRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class CalendarVM(application: Application) : AndroidViewModel(application) {
@@ -67,7 +69,7 @@ class CalendarVM(application: Application) : AndroidViewModel(application) {
     }
 
     fun addAppointment(appointment: Appointment) {
-        viewModelScope.launch {
+        CoroutineScope(Dispatchers.IO).launch {
             appointmentRepository.insert(appointment)
         }
     }
@@ -92,7 +94,7 @@ class CalendarVM(application: Application) : AndroidViewModel(application) {
     }
 
     fun addEvent(event: Event) {
-        viewModelScope.launch {
+        CoroutineScope(Dispatchers.IO).launch {
             eventRepository.insert(event)
         }
     }

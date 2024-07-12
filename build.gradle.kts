@@ -2,6 +2,7 @@
 plugins {
     alias(libs.plugins.androidApplication) apply false
     alias(libs.plugins.jetbrainsKotlinAndroid) apply false
+    kotlin("plugin.serialization") version "1.8.0"
 //    alias(libs.plugins.org.jetbrains.kotlin.kapt) apply false
 //    alias(libs.plugins.googleKsp) apply true
     // Add KSP plugin alias
