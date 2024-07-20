@@ -8,11 +8,15 @@
         android:id="@+id/appointmentsFragment"
         android:name="com.hashi.calendarapp.ui.AppointmentsFragment"
         android:label="Appointments"
-        tools:layout="@layout/fragment_appointments" />
+        tools:layout="@layout/fragment_appointments">
+        <action
+            android:id="@+id/action_appointmentsFragment_to_appointmentDetailFragment"
+            app:destination="@id/appointmentDetailFragment" />
+    </fragment>
 
     <fragment
-        android:id="@+id/eventsFragment"
-        android:name="com.hashi.calendarapp.ui.EventsFragment"
-        android:label="Events"
-        tools:layout="@layout/fragment_events" />
+        android:id="@+id/appointmentDetailFragment"
+        android:name="com.hashi.calendarapp.ui.AppointmentDetailFragment"
+        android:label="Appointment Detail"
+        tools:layout="@layout/fragment_appointment_detials" />
 </navigation>

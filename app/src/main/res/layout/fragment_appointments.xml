@@ -5,14 +5,6 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <TextView
-        android:id="@+id/selectedDateText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Selected Date: "
-        android:textSize="18sp"
-        android:layout_marginBottom="16dp" />
-
     <EditText
         android:id="@+id/appointmentTitle"
         android:layout_width="match_parent"
@@ -33,6 +25,12 @@
         android:layout_height="wrap_content"
         android:text="Pick Date"
         android:layout_marginBottom="8dp" />
+    <Button
+        android:id="@+id/pickTimeButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Pick Time"
+        android:layout_marginBottom="8dp"/>
 
     <Button
         android:id="@+id/addAppointmentButton"
@@ -67,6 +65,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Search"
+        android:layout_marginBottom="16dp" />
+
+    <TextView
+        android:id="@+id/selectedDateText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Selected Date: "
+        android:textSize="18sp"
+        android:layout_marginBottom="12dp" />
+    <TextView
+        android:id="@+id/selectedTimeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Selected Time: "
+        android:textSize="18sp"
         android:layout_marginBottom="16dp" />
 
     <ListView

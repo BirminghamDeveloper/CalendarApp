@@ -4,11 +4,13 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import android.content.Context
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.hashi.calendarapp.model.Appointment
 import com.hashi.calendarapp.model.Event
 
 // AppDatabase.kt
-@Database(entities = [Appointment::class, Event::class], version = 1)
+@Database(entities = [Appointment::class, Event::class], version = 2)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun appointmentDao(): AppointmentDao
     abstract fun eventDao(): EventDao
@@ -23,9 +25,16 @@ abstract class AppDatabase : RoomDatabase() {
                     context.applicationContext,
                     AppDatabase::class.java,
                     "app_database"
-                ).build()
+                ).fallbackToDestructiveMigration()
+                    .build()
                 INSTANCE = instance
                 instance
+            }
+        }
+        val MIGRATION_1_2 = object : Migration(1, 2) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                // Migration strategy for adding the "time" column to "appointments"
+                database.execSQL("ALTER TABLE appointments ADD COLUMN time TEXT NOT NULL DEFAULT ''")
             }
         }
     }
