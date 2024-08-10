@@ -20,13 +20,13 @@
         android:layout_marginBottom="8dp" />
 
     <Button
-        android:id="@+id/pickDateButton"
+        android:id="@+id/btnPickDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Pick Date"
         android:layout_marginBottom="8dp" />
     <Button
-        android:id="@+id/pickTimeButton"
+        android:id="@+id/btnPickTime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Pick Time"
@@ -66,7 +66,6 @@
         android:layout_height="wrap_content"
         android:text="Search"
         android:layout_marginBottom="16dp" />
-
     <TextView
         android:id="@+id/selectedDateText"
         android:layout_width="wrap_content"
@@ -89,8 +88,8 @@
         android:layout_weight="1"
         android:layout_marginBottom="16dp" />
 
-    <androidx.recyclerview.widget.RecyclerView
+    <!--<androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"/>-->
 </LinearLayout>

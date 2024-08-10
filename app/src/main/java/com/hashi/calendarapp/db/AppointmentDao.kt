@@ -21,4 +21,7 @@ interface AppointmentDao {
 
     @Query("SELECT * FROM appointments WHERE title LIKE :searchQuery")
     fun searchAppointmentsByTitle(searchQuery: String): LiveData<List<Appointment>>
+
+    @Query("SELECT * FROM appointments")
+    fun getAllAppointments(): LiveData<List<Appointment>>
 }

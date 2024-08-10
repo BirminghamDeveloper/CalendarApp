@@ -8,14 +8,6 @@ import com.hashi.calendarapp.model.Event
 
 class AppointmentRepository(private val appointmentDao: AppointmentDao) {
 
-    fun getAppointmentsByDate(date: String): LiveData<List<Appointment>> {
-        return appointmentDao.getAppointmentsByDate(date)
-    }
-
-    fun searchAppointmentsByTitle(searchQuery: String): LiveData<List<Appointment>> {
-        return appointmentDao.searchAppointmentsByTitle("%$searchQuery%")
-    }
-
     suspend fun insert(appointment: Appointment): Long {
         return appointmentDao.insert(appointment)
     }
@@ -26,6 +18,18 @@ class AppointmentRepository(private val appointmentDao: AppointmentDao) {
 
     suspend fun delete(appointment: Appointment) {
         appointmentDao.delete(appointment)
+    }
+
+    fun getAllAppointments(): LiveData<List<Appointment>> {
+        return appointmentDao.getAllAppointments()
+    }
+
+    fun getAppointmentsByDate(date: String): LiveData<List<Appointment>> {
+        return appointmentDao.getAppointmentsByDate(date)
+    }
+
+    fun searchAppointmentsByTitle(searchQuery: String): LiveData<List<Appointment>> {
+        return appointmentDao.searchAppointmentsByTitle("%$searchQuery%")
     }
 }
 

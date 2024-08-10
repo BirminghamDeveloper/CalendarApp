@@ -50,8 +50,8 @@ class AppointmentsFragment : Fragment() {
         appointmentTitle = view.findViewById(R.id.appointmentTitle)
         appointmentDescription = view.findViewById(R.id.appointmentDescription)
         searchQuery = view.findViewById(R.id.searchQuery)
-        pickDateButton = view.findViewById(R.id.pickDateButton)
-        pickTimeButton = view.findViewById(R.id.pickTimeButton)
+        pickDateButton = view.findViewById(R.id.btnPickDate)
+        pickTimeButton = view.findViewById(R.id.btnPickTime)
 
         return view
     }

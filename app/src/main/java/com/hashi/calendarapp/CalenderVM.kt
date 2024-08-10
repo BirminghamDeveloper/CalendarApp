@@ -25,6 +25,8 @@ class CalendarVM(application: Application) : AndroidViewModel(application) {
     private val _events = MediatorLiveData<List<Event>>()
     val events: LiveData<List<Event>> get() = _events
 
+    var getAllAppointments: LiveData<List<Appointment>>
+
     private val _appointmentSearchResults = MediatorLiveData<List<Appointment>>()
     val appointmentSearchResults: LiveData<List<Appointment>> get() = _appointmentSearchResults
 
@@ -48,6 +50,7 @@ class CalendarVM(application: Application) : AndroidViewModel(application) {
                 getEventsForDate(it)
             }
         }
+        getAllAppointments = appointmentRepository.getAllAppointments()
     }
 
     fun selectDate(date: String) {
